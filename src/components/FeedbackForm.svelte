@@ -1,11 +1,13 @@
 <script>
-    import {createEventDispatcher} from "svelte";
+    import { FeedbackStore } from '../stores';
     import {v4 as uuidv4} from 'uuid';
     import Button from "./Button.svelte";
     import Card from "./Card.svelte";
     import RatingSelect from "./RatingSelect.svelte";
 
-    const dispatch = createEventDispatcher();
+    let feedback = [];
+    FeedbackStore.subscribe(value => feedback = value);
+
     const minTextThreshold = 10;
     let text = '';
     let message = null;
@@ -26,14 +28,13 @@
     const handleRatingSelected = e => rating = e.detail;
 
     const handleFormSubmit = () => {
-        console.log("Form submitted");
         if (text.trim().length > minTextThreshold) {
             const newFeedback = {
                 id: uuidv4(),
                 text,
                 rating: +rating,
             }
-            dispatch('feedback-submit', newFeedback);
+            FeedbackStore.update(value => [newFeedback, ...value]);
         }
     }
 </script>
