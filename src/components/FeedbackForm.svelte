@@ -5,8 +5,8 @@
     import Card from "./Card.svelte";
     import RatingSelect from "./RatingSelect.svelte";
 
-    let feedback = [];
-    FeedbackStore.subscribe(value => feedback = value);
+    // let feedback = [];
+    // FeedbackStore.subscribe(value => feedback = value);
 
     const minTextThreshold = 10;
     let text = '';
@@ -31,10 +31,12 @@
         if (text.trim().length > minTextThreshold) {
             const newFeedback = {
                 id: uuidv4(),
-                text,
+                text, 
                 rating: +rating,
             }
-            FeedbackStore.update(value => [newFeedback, ...value]);
+            FeedbackStore.update(currentValue => {
+                return([newFeedback, ...currentValue]);
+            });
         }
     }
 </script>
