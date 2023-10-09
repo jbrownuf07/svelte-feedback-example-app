@@ -1,5 +1,6 @@
 {
-  "name": "svelte-app",
+  "name": "svelte-feedback-example-app",
+  "author": "Joe Brown",
   "version": "1.0.0",
   "private": true,
   "type": "module",

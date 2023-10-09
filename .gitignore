@@ -1,2 +1,3 @@
 .vscode/
 public/build/
+package-lock.json
